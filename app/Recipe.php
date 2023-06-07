@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use Carbon\CarbonInterval;
 use Illuminate\Support\Str;
 
@@ -17,7 +16,8 @@ class Recipe
         public $yield = 0,
         public $totalTime = 0,
         public $images = [],
-    ) {}
+    ) {
+    }
 
     public function ingredientRows()
     {
@@ -40,7 +40,7 @@ class Recipe
                 $interval = Str::replace("DT", "D", $this->totalTime);
                 $duration = CarbonInterval::fromString($interval);
                 return $duration->forHumans();
-            } catch(\Exception $e){
+            } catch(\Exception $e) {
                 return null;
             }
         }

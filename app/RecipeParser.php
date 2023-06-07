@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-use App\Recipe;
 use Brick\StructuredData\Item;
 use Illuminate\Support\Str;
 
@@ -34,8 +32,8 @@ class RecipeParser
         protected $yield = '',
         protected $totalTime = '',
         protected $images = []
-    )
-    {}
+    ) {
+    }
 
     public function parse(Item $item): Recipe
     {
@@ -54,17 +52,17 @@ class RecipeParser
         $this->title = (is_array($values) ? $values[0] : $values);
     }
 
-    function parse_recipeyield($values)
+    public function parse_recipeyield($values)
     {
         $this->yield = (is_array($values) ? $values[0] : $values);
     }
 
-    function parse_totaltime($values)
+    public function parse_totaltime($values)
     {
         $this->totalTime = (is_array($values) ? $values[0] : $values);
     }
 
-    function parse_image($values)
+    public function parse_image($values)
     {
         foreach($values as $item) {
             if ($item instanceof Item) {
@@ -91,7 +89,7 @@ class RecipeParser
         }
     }
 
-    function parse_recipeingredient($values)
+    public function parse_recipeingredient($values)
     {
         if (is_array($values)) {
             $this->ingredients = array_merge(collect($values)->transform(function ($item) {
@@ -100,10 +98,10 @@ class RecipeParser
         }
     }
 
-    function parse_recipeinstructions($values)
+    public function parse_recipeinstructions($values)
     {
         foreach($values as $item) {
-            if ($item instanceof Item){
+            if ($item instanceof Item) {
                 if(Str::contains(Str::lower(implode(',', $item->getTypes())), 'howtostep')) {
                     foreach($item->getProperties() as $name => $values) {
                         $name = Str::replace(['http://schema.org/', 'https://schema.org/'], '', Str::lower($name));
@@ -112,7 +110,7 @@ class RecipeParser
                         }
                     }
                 }
-            } else{
+            } else {
                 $this->steps[] = html_entity_decode($item);
             }
         }

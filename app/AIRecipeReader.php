@@ -4,9 +4,7 @@ namespace App;
 
 use OpenAI;
 use DOMDocument;
-use App\Recipe;
 use Brick\StructuredData\Reader\JsonLdReader;
-use Illuminate\Support\Str;
 
 class AIRecipeReader
 {
@@ -23,7 +21,7 @@ class AIRecipeReader
             - servings
             
             Please generate the output as valid JSON, preferably in ld+json format based on schema.org specificiation.";
-        
+
         $client = OpenAI::client(config('ai.open_ai_key'));
 
         $result = $client->chat()->create([
@@ -33,10 +31,10 @@ class AIRecipeReader
             ],
         ]);
 
-        $dom = new DOMDocument;
+        $dom = new DOMDocument();
         $html = mb_convert_encoding('<script type="application/ld+json">'.$result->choices[0]->message->content.'</script>', 'HTML-ENTITIES', "UTF-8");
         $dom->loadHTML($html);
-        $items = (new JsonLdReader)->read($dom, $url);
+        $items = (new JsonLdReader())->read($dom, $url);
         return RecipeParser::fromItems($items, $url);
     }
 }
