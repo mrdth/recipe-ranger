@@ -69,7 +69,8 @@ class RecipeParser
         foreach($values as $item) {
             if ($item instanceof Item) {
                 foreach($item->getProperties() as $name => $values) {
-                    $name = Str::replace('http://schema.org/', '', Str::lower($name));
+
+                    $name = Str::replace(['http://schema.org/', 'https://schema.org/'], '', Str::lower($name));
                     // $name may be one of [url, height, thumbnail, width]
                     if ($name == "url") {
                         // If it's relative
