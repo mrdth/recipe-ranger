@@ -8,7 +8,7 @@ use Brick\StructuredData\Reader\JsonLdReader;
 
 class AIRecipeReader
 {
-    public static function read($url)
+    public static function read($url): ?Recipe
     {
         $prompt = "Extract only the following information from the recipe found here: $url
 
@@ -16,10 +16,10 @@ class AIRecipeReader
             - publishDate (in YYYY-MM-DD format)
             - total cook time (in human-readable format)
             - author
-            - ingredients 
+            - ingredients
             - steps (array of strings)
             - servings
-            
+
             Please generate the output as valid JSON, preferably in ld+json format based on schema.org specificiation.";
 
         $client = OpenAI::client(config('ai.open_ai_key'));

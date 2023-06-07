@@ -5,19 +5,19 @@ namespace App;
 use Brick\StructuredData\Item;
 use Illuminate\Support\Str;
 
-class RecipeParser
+final class RecipeParser
 {
-    public static function fromItems($items, $url)
+    public static function fromItems($items, $url): ?Recipe
     {
-        foreach($items as $item) {
-            if(Str::contains(Str::lower(implode(',', $item->getTypes())), 'recipe')) {
-                return (new static(url: $url))->parse($item);
-            }
-        }
-
         // The whole thing might be a recipe
         if (count($items) == 1) {
-            return (new static(url: $url))->parse($item);
+            return (new self(url: $url))->parse($items);
+        }
+
+        foreach($items as $item) {
+            if(Str::contains(Str::lower(implode(',', $item->getTypes())), 'recipe')) {
+                return (new self(url: $url))->parse($item);
+            }
         }
 
         return null;
@@ -47,22 +47,22 @@ class RecipeParser
         return new Recipe($this->title, $this->url, $this->author, $this->ingredients, $this->steps, $this->yield, $this->totalTime, $this->images);
     }
 
-    protected function parse_name($values)
+    protected function parse_name($values): void
     {
         $this->title = (is_array($values) ? $values[0] : $values);
     }
 
-    public function parse_recipeyield($values)
+    public function parse_recipeyield($values): void
     {
         $this->yield = (is_array($values) ? $values[0] : $values);
     }
 
-    public function parse_totaltime($values)
+    public function parse_totaltime($values): void
     {
         $this->totalTime = (is_array($values) ? $values[0] : $values);
     }
 
-    public function parse_image($values)
+    public function parse_image($values): void
     {
         foreach($values as $item) {
             if ($item instanceof Item) {
@@ -89,7 +89,7 @@ class RecipeParser
         }
     }
 
-    public function parse_recipeingredient($values)
+    public function parse_recipeingredient($values): void
     {
         if (is_array($values)) {
             $this->ingredients = array_merge(collect($values)->transform(function ($item) {
@@ -98,7 +98,7 @@ class RecipeParser
         }
     }
 
-    public function parse_recipeinstructions($values)
+    public function parse_recipeinstructions($values): void
     {
         foreach($values as $item) {
             if ($item instanceof Item) {

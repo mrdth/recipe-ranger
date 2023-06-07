@@ -19,7 +19,7 @@ class Recipe
     ) {
     }
 
-    public function ingredientRows()
+    public function ingredientRows(): array
     {
         // 3 rows total, get number of ingredients per row
         $perRow = (int)ceil(count($this->ingredients) / 3);
@@ -32,7 +32,7 @@ class Recipe
         return $ingredients;
     }
 
-    public function humanTotalTime()
+    public function humanTotalTime(): ?string
     {
         if ($this->totalTime) {
             try {
