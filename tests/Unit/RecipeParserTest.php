@@ -1,6 +1,6 @@
 <?php
 
-use App\Recipe;
+use App\Models\Recipe;
 use App\RecipeParser;
 use Brick\StructuredData\HTMLReader;
 use Brick\StructuredData\Reader\JsonLdReader;
@@ -25,7 +25,7 @@ it('can be make a recipe from items', function () {
     $recipe = RecipeParser::fromItems($items, 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
 
     expect($recipe)
-        ->toBeInstanceOf(\App\Models\Recipe::class)
+        ->toBeInstanceOf(Recipe::class)
         ->and($recipe->attributesToArray())->toBe([
             'title' => 'Air fryer chicken thighs',
             'url' => 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe',
