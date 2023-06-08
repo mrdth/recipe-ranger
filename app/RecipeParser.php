@@ -46,7 +46,7 @@ final class RecipeParser
             }
         }
 
-        return new Recipe([
+        return Recipe::firstOrNew([
             'title' => $this->title,
             'url' => $this->url,
             'author' => $this->author,
