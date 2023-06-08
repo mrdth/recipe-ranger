@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->json('steps');
             $table->string('yield')->nullable();
             $table->string('totalTime')->nullable();
-            $table->json('images');
+            $table->json('images')->nullable();
             $table->boolean('ai_generated')->default(false);
             $table->timestamps();
         });
