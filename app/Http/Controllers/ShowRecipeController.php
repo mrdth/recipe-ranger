@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\FetchRecipe;
 use Illuminate\Http\Request;
 
-class RecipeController extends Controller
+class ShowRecipeController extends Controller
 {
     /**
      * Handle the incoming request.

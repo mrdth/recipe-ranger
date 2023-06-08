@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShowRecipeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', \App\Http\Controllers\RecipeController::class);
+Route::get('/', ShowRecipeController::class);
