@@ -54,7 +54,7 @@ final class RecipeParser
             'steps' => $this->steps,
             'yield' => $this->yield,
             'totalTime' => $this->totalTime,
-            'image' => $this->images,
+            'images' => $this->images,
         ]);
     }
 
