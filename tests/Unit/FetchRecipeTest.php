@@ -1,25 +1,18 @@
 <?php
 
+use App\Actions\FetchRecipe;
 use App\Recipe;
-use App\RecipeParser;
-use Brick\StructuredData\HTMLReader;
-use Brick\StructuredData\Reader\JsonLdReader;
+use Illuminate\Support\Facades\Http;
 
-function makeItems(): array
-{
-    $html = mb_convert_encoding(file_get_contents(__DIR__ . "/../data/recipe.html"), 'HTML-ENTITIES', "UTF-8");
+beforeEach(
+    fn () => Http::fake([
+        'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe' =>
+            Http::response(file_get_contents(__DIR__ . "/../data/recipe.html"), 200)
+    ])
+);
 
-    return (new HTMLReader(new JsonLdReader()))->read($html, 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
-}
-
-it('can be instantiated', function () {
-    $parser = new RecipeParser();
-    expect($parser)->toBeInstanceOf(RecipeParser::class);
-});
-
-it('can be make a recipe from items', function () {
-    $items = makeItems();
-    $recipe = RecipeParser::fromItems($items, 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
+it('can fetch a recipe from a URL', function () {
+    $recipe = (new FetchRecipe())->handle('https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
 
     expect($recipe)
         ->toBeInstanceOf(Recipe::class)
