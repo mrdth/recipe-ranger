@@ -1,14 +1,23 @@
 <?php
 
-namespace App;
+namespace App\Actions;
 
-use OpenAI;
-use DOMDocument;
+use App\Recipe;
+use App\RecipeParser;
 use Brick\StructuredData\Reader\JsonLdReader;
+use DOMDocument;
+use OpenAI;
 
 class AIRecipeReader
 {
-    public static function read($url): ?Recipe
+    protected $client;
+
+    public function __construct()
+    {
+        $this->setClient(OpenAI::client(config('ai.open_ai_key')));
+    }
+
+    public function handle($url): ?Recipe
     {
         $prompt = "Extract only the following information from the recipe found here: $url
 
@@ -22,19 +31,28 @@ class AIRecipeReader
 
             Please generate the output as valid JSON, preferably in ld+json format based on schema.org specificiation.";
 
-        $client = OpenAI::client(config('ai.open_ai_key'));
-
-        $result = $client->chat()->create([
+        $result = $this->client->chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
-                ['role' => 'user', 'content' => $prompt]
+                ['role' => 'user', 'content' => $prompt],
             ],
         ]);
 
         $dom = new DOMDocument();
-        $html = mb_convert_encoding('<script type="application/ld+json">'.$result->choices[0]->message->content.'</script>', 'HTML-ENTITIES', "UTF-8");
+        $html = mb_convert_encoding(
+            '<script type="application/ld+json">' . $result->choices[0]->message->content . '</script>',
+            'HTML-ENTITIES',
+            "UTF-8"
+        );
         $dom->loadHTML($html);
         $items = (new JsonLdReader())->read($dom, $url);
         return RecipeParser::fromItems($items, $url);
+    }
+
+    public function setClient(OpenAI\Client | OpenAI\Testing\ClientFake $client): self
+    {
+        $this->client = $client;
+
+        return $this;
     }
 }

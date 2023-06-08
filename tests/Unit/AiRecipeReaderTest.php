@@ -1,19 +1,30 @@
 <?php
 
-use App\Actions\FetchRecipe;
+use App\Actions\AIRecipeReader;
 use App\Recipe;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Http;
+use OpenAI\Responses\Chat\CreateResponse;
+use OpenAI\Responses\Chat\CreateResponseMessage;
+use OpenAI\Testing\ClientFake;
 
-beforeEach(
-    fn() => Http::fake([
-        'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe' =>
-            Http::response(File::get(__DIR__ . "/../data/recipe.html"), 200),
-    ])
-);
+test('example', function () {
+    $message = CreateResponseMessage::from([
+        'role' => 'assistant',
+        'content' => File::get(__DIR__ . '/../data/recipe.json'),
+    ])->toArray();
+    $client = new ClientFake([
+        CreateResponse::fake([
+            'choices' => [
+                [
+                    'message' => $message,
+                ],
+            ],
+        ]),
+    ]);
 
-it('can fetch a recipe from a URL', function () {
-    $recipe = (new FetchRecipe())->handle('https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
+    $recipe = (new AIRecipeReader())
+        ->setClient($client)
+        ->handle('https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe');
 
     expect($recipe)
         ->toBeInstanceOf(Recipe::class)

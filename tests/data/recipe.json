@@ -1,0 +1,78 @@
+{
+    "@context": "https://schema.org",
+    "@id": "https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe",
+    "@type": "Recipe",
+    "description": "Cooking chicken thighs in an air fryer is a speedy way to achieve succulent meat with a delicious crispy skin. A spicy coating makes the perfect finishing touch",
+    "image": {
+        "@type": "ImageObject",
+        "height": 574,
+        "url": "https://images.immediate.co.uk/production/volatile/sites/30/2022/04/Air-Fryer-Chicken-Thighs-d4575b2.jpg?resize=768,574",
+        "width": 768
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs"
+    },
+    "name": "Air fryer chicken thighs",
+    "url": "https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs",
+    "author": [
+        {
+            "@type": "Person",
+            "name": "Samuel Goldsmith",
+            "url": "https://www.bbcgoodfood.com/author/samuelgoldsmith"
+        }
+    ],
+    "dateModified": "2023-05-02T16:12:29+00:00",
+    "datePublished": "2022-04-21T15:51:05+00:00",
+    "headline": "Air fryer chicken thighs",
+    "keywords": "Airfryer recipes, Chicken, Chicken thighs",
+    "publisher": {
+        "@type": "Organization",
+        "name": "BBC Good Food",
+        "url": "https://www.bbcgoodfood.com",
+        "logo": {
+            "@type": "ImageObject",
+            "height": 70,
+            "url": "https://images.immediate.co.uk/production/volatile/sites/30/2022/12/cropped-GF-logos2022CMYK-PrintUKONLY10-2-434430d-f5051ed.png?resize=265,70",
+            "width": 265
+        }
+    },
+    "isAccessibleForFree": "False",
+    "hasPart": {
+        "@type": "WebPageElement",
+        "isAccessibleForFree": "False",
+        "cssSelector": ".js-piano-locked-content"
+    },
+    "cookTime": "PT25M",
+    "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "88 calories",
+        "fatContent": "5 grams fat",
+        "saturatedFatContent": "1 grams saturated fat",
+        "fiberContent": "0.3 grams fiber",
+        "proteinContent": "11 grams protein",
+        "sodiumContent": "0.7 milligram of sodium"
+    },
+    "prepTime": "PT2M",
+    "recipeCategory": "Dinner",
+    "recipeIngredient": [
+        "1 tsp paprika",
+        "½ tsp  mixed herbs",
+        "½ tsp  garlic granules (optional)",
+        "4 chicken thighs, bone in",
+        "1 tsp olive oil"
+    ],
+    "recipeInstructions": [
+        {
+            "@type": "HowToStep",
+            "text": "Combine the paprika in a bowl with the herbs and garlic granules, if using, together with ½ tsp salt and ½ tsp ground black pepper. Scatter onto a plate. Rub the chicken thighs with the oil, then coat in the spice mix."
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Put in the basket of your air fryer and cook, skin-side down, for 10 mins at 180C. Turn over and cook for a further 10-15 mins until cooked through and the skin is crispy. To check they are cooked, pierce the thickest part of the thigh with a knife to see if the juices run clear. Remove from the air fryer immediately to stop the skin from softening."
+        }
+    ],
+    "recipeYield": 4,
+    "suitableForDiet": "https://schema.org/GlutenFreeDiet",
+    "totalTime": "PT27M"
+}

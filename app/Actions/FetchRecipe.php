@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\AIRecipeReader;
+use App\Recipe;
 use App\RecipeParser;
 use Brick\StructuredData\HTMLReader;
 use Brick\StructuredData\Reader\JsonLdReader;
@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Http;
 
 class FetchRecipe
 {
-    public function handle(string $recipe_url): ?\App\Recipe
+    private $ai_reader;
+
+    public function __construct()
+    {
+        $this->ai_reader = new AIRecipeReader();
+    }
+
+    public function handle(string $recipe_url): ?Recipe
     {
         $response = Http::throw()->get($recipe_url);
 
@@ -36,8 +43,8 @@ class FetchRecipe
 
         // Fallback to our robot overlords. Nice overlords, we thank you.
         // Yes, we love you, and definitely don't fear you. Yes.
-        if (!$recipe) {
-            $recipe = AIRecipeReader::read($recipe_url);
+        if (!isset($recipe)) {
+            $recipe = $this->ai_reader->handle($recipe_url);
         }
 
         return $recipe;
