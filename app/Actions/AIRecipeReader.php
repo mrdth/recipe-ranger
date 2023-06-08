@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Recipe;
+use App\Models\Recipe;
 use App\RecipeParser;
 use Brick\StructuredData\Reader\JsonLdReader;
 use DOMDocument;
@@ -46,7 +46,11 @@ class AIRecipeReader
         );
         $dom->loadHTML($html);
         $items = (new JsonLdReader())->read($dom, $url);
-        return RecipeParser::fromItems($items, $url);
+
+        $recipe = RecipeParser::fromItems($items, $url);
+        $recipe->ai_generated = true;
+
+        return $recipe;
     }
 
     public function setClient(OpenAI\Client | OpenAI\Testing\ClientFake $client): self

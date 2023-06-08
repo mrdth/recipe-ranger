@@ -20,7 +20,7 @@ class ShowRecipeController extends Controller
                 $validation = 'Unfortunately, we could not parse that recipe!';
             }
         }
-
+        dump($recipe);
         return view('form', [
             'recipe' => $recipe,
             'url' => $request->recipe,

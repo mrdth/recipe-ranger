@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Recipe;
 use Brick\StructuredData\Item;
 use Exception;
 use Illuminate\Support\Str;
@@ -45,16 +46,16 @@ final class RecipeParser
             }
         }
 
-        return new Recipe(
-            $this->title,
-            $this->url,
-            $this->author,
-            $this->ingredients,
-            $this->steps,
-            $this->yield,
-            $this->totalTime,
-            $this->images
-        );
+        return new Recipe([
+            'title' => $this->title,
+            'url' => $this->url,
+            'author' => $this->author,
+            'ingredients' => $this->ingredients,
+            'steps' => $this->steps,
+            'yield' => $this->yield,
+            'totalTime' => $this->totalTime,
+            'image' => $this->images,
+        ]);
     }
 
     protected function parse_name($values): void

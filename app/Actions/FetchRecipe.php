@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Recipe;
+use App\Models\Recipe;
 use App\RecipeParser;
 use Brick\StructuredData\HTMLReader;
 use Brick\StructuredData\Reader\JsonLdReader;
