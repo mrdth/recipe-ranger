@@ -22,6 +22,7 @@ it('can import a recipe', function () {
             'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe'
         )
         ->expectsOutput("Recipe 'Air fryer chicken thighs' imported")
+        ->expectsQuestion("Add another recipe?", false)
         ->assertExitCode(0);
 
     expect(Recipe::all()->count())->toBe(1);

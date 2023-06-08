@@ -12,7 +12,7 @@ class ImportRecipe extends Command
      *
      * @var string
      */
-    protected $signature = 'import:recipe {url?}';
+    protected $signature = 'import:recipe';
 
     /**
      * The console command description.
@@ -26,11 +26,15 @@ class ImportRecipe extends Command
      */
     public function handle(FetchRecipe $action)
     {
-        $url = $this->argument('url') ?? $this->ask('What is the URL to the recipe?');
+        $add_more = true;
+        do {
+            $url = $this->ask('What is the URL to the recipe?');
 
-        $recipe = $action->handle($url);
-        $recipe->save();
+            $recipe = $action->handle($url);
+            $recipe->save();
 
-        $this->line("Recipe '{$recipe->title}' imported");
+            $this->line("Recipe '{$recipe->title}' imported");
+            $add_more = $this->confirm('Add another recipe?', true);
+        } while ($add_more);
     }
 }
