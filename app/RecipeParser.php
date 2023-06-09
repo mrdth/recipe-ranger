@@ -27,6 +27,7 @@ final class RecipeParser
 
     public function __construct(
         protected $title = '',
+        protected $description = '',
         protected $url = '',
         protected $author = '',
         protected $ingredients = [],
@@ -49,7 +50,9 @@ final class RecipeParser
         return Recipe::firstOrNew([
             'title' => $this->title,
             'url' => $this->url,
+        ])->fill([
             'author' => $this->author,
+            'description' => $this->description,
             'ingredients' => $this->ingredients,
             'steps' => $this->steps,
             'yield' => $this->yield,
@@ -61,6 +64,11 @@ final class RecipeParser
     protected function parse_name($values): void
     {
         $this->title = (is_array($values) ? $values[0] : $values);
+    }
+
+    protected function parse_description($values): void
+    {
+        $this->description = (is_array($values) ? $values[0] : $values);
     }
 
     public function parse_recipeyield($values): void
