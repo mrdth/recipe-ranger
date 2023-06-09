@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
 beforeEach(
-    fn() => Http::fake([
+    fn () => Http::fake([
         'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe' =>
             Http::response(File::get(__DIR__ . "/../data/recipe.html"), 200),
     ])
@@ -21,6 +21,7 @@ it('can fetch a recipe from a URL', function () {
             'title' => 'Air fryer chicken thighs',
             'url' => 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe',
             'author' => '',
+            'description' => 'Cooking chicken thighs in an air fryer is a speedy way to achieve succulent meat with a delicious crispy skin. A spicy coating makes the perfect finishing touch',
             'ingredients' => [
                 "1 tsp paprika",
                 "½ tsp  mixed herbs",

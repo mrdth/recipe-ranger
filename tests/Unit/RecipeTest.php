@@ -4,14 +4,15 @@ use App\Models\Recipe;
 
 test('fillable attributes', function () {
     expect((new Recipe())->getFillable())->toBe([
-        0 => 'title',
-        1 => 'url',
-        2 => 'author',
-        3 => 'ingredients',
-        4 => 'steps',
-        5 => 'yield',
-        6 => 'totalTime',
-        7 => 'images',
+        'title',
+        'url',
+        'author',
+        'description',
+        'ingredients',
+        'steps',
+        'yield',
+        'totalTime',
+        'images',
     ]);
 });
 

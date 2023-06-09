@@ -16,6 +16,7 @@ class Recipe extends Model
         'title',
         'url',
         'author',
+        'description',
         'ingredients',
         'steps',
         'yield',

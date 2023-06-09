@@ -30,6 +30,7 @@ it('can be make a recipe from items', function () {
             'title' => 'Air fryer chicken thighs',
             'url' => 'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe',
             'author' => '',
+            'description' => 'Cooking chicken thighs in an air fryer is a speedy way to achieve succulent meat with a delicious crispy skin. A spicy coating makes the perfect finishing touch',
             'ingredients' => [
                 "1 tsp paprika",
                 "½ tsp  mixed herbs",
