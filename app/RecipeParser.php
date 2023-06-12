@@ -135,4 +135,22 @@ final class RecipeParser
             }
         }
     }
+
+    public function parse_author($values): void
+    {
+        foreach ($values as $item) {
+            if ($item instanceof Item) {
+                if (Str::contains(Str::lower(implode(',', $item->getTypes())), 'person')) {
+                    foreach ($item->getProperties() as $name => $values) {
+                        $name = Str::replace(['http://schema.org/', 'https://schema.org/'], '', Str::lower($name));
+                        if ($name == "name") {
+                            $this->author = html_entity_decode($values[0]);
+                        }
+                    }
+                }
+            } else {
+                $this->author = html_entity_decode($item);
+            }
+        }
+    }
 }
