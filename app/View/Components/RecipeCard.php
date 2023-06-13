@@ -13,7 +13,6 @@ class RecipeCard extends Component
 
     public function __construct(public Recipe $recipe)
     {
-        dd('ddd');
         $url = Url::fromString($this->recipe->url);
         $this->site['name'] = $url->getAuthority();
         $this->site['url'] = $url->getScheme() . '://' . $url->getAuthority();
