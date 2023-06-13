@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ShowRecipeController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/fetch', ShowRecipeController::class);
+
+Route::get('/recipes', [RecipeController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

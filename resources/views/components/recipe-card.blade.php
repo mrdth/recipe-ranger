@@ -1,8 +1,8 @@
 <article class="recipe-card">
     <img
         alt="Lava"
-        src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%] dark:shadow-gray-700/25"
+        src="{{ $recipe->images[0] }}"
+        class="h-28 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%] dark:shadow-gray-700/25"
     />
 
     <div class="p-4">
@@ -17,5 +17,8 @@
         >
             {{ $recipe->description }}
         </p>
+    </div>
+    <div>
+        <a href="{{ $site['url'] }}">{{ $site['name'] }}</a>
     </div>
 </article>
