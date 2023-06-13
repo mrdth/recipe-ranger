@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 use function Pest\Laravel\artisan;
 
 beforeEach(
-    fn() => Http::fake([
+    fn () => Http::fake([
         'https://www.bbcgoodfood.com/recipes/air-fryer-chicken-thighs#Recipe' =>
             Http::response(File::get(__DIR__ . "/../data/recipe.html"), 200),
     ])
