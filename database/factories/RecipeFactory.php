@@ -25,6 +25,7 @@ class RecipeFactory extends Factory
             'title' => Arr::random($data['titles'], 1)[0],
             'url' => fake()->url,
             'author' => fake()->name,
+            'description' => Arr::random($data['descriptions'], 1)[0],
             'ingredients' => Arr::random($data['ingredients'], fake()->numberBetween(7, 20)),
             'steps' => Arr::random($data['steps'], fake()->numberBetween(2, 4)),
             'yield' => fake()->numberBetween(2, 6),
