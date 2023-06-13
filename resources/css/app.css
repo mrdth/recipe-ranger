@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind screens;
+
+#theme-dark {
+    display: none;
+}
+
+.dark #theme-dark {
+    display: block;
+}
+
+#theme-light {
+    display: block;
+}
+
+.dark #theme-light {
+    display: none;
+}

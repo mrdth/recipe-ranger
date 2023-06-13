@@ -22,19 +22,22 @@
             </div>
 
             <!-- Settings Dropdown -->
-            @if(Auth::user())
-                <x-nav-settings-dropdown></x-nav-settings-dropdown>
-            @else
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                        {{ __('Log In') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                        {{ __('Register') }}
-                    </x-nav-link>
-                </div>
-            @endif
+            <div class="flex">
+                @if(Auth::user())
+                    <x-nav-settings-dropdown></x-nav-settings-dropdown>
+                @else
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                            {{ __('Log In') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            {{ __('Register') }}
+                        </x-nav-link>
+                    </div>
+                @endif
 
+                <x-theme-settings-dropdown></x-theme-settings-dropdown>
+            </div>
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
