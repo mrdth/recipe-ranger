@@ -1,4 +1,4 @@
-<div class="hidden sm:flex sm:items-center sm:ml-6">
+<div {{$attributes}}>
     <x-dropdown align="right" width="32">
         <x-slot name="trigger">
             <button
